@@ -1,0 +1,7 @@
+<h1>Home</h1>
+<h2>Bem vindo, {{ user.name }}</h2>
+{{#if auth}}
+  <p>Está autenticado.</p>
+{{else}}
+  <p>Vá embora!</p>
+{{/if}}

@@ -1,0 +1,8 @@
+<h1>Dashboard</h1>
+<ul>
+  {{#each items}}
+  {{#with this}}
+    <li>{{id}}: {{name}}</li>
+  {{/with}}
+  {{/each}}
+</ul>
