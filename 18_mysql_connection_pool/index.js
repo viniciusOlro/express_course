@@ -2,6 +2,7 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 const mysql = require('mysql')
+const conn = require('./db/conn')
 
 //Variables
 const app = express()
@@ -25,8 +26,9 @@ app.use(express.static('public'))
 //INSERT
 app.post('/books/insert', (req, res) => {
   const { title, pages } = req.body;
-  const sql = `INSERT INTO books (title, pageqty) VALUES ('${title}', '${pages}')`
-  conn.query(sql, (e) => {
+  const sql = `INSERT INTO books (??, ??) VALUES (?, ?)`
+  const data = ['title', 'pageqty', title, pages]
+  conn.query(sql, data, (e) => {
     if(e) {
       console.log(e);
     } else {
@@ -80,12 +82,6 @@ app.get('/', (req, res) => {
   return res.render('home')
 })
 
-const conn = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'nodemysql',
-})
 
 //POST UPDATE BOOKS
 app.post('/books/update', (req, res) => {
@@ -112,12 +108,4 @@ app.post('/books/delete/:id', (req, res) => {
   })
 })
 
-conn.connect(function (err) {
-  if (err) {
-    console.log(err)
-  } else {
-    console.log('Conectado ao MySQL!')
-  }
-
-  app.listen(3000)
-})
+app.listen(3000)

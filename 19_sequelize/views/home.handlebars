@@ -1,0 +1,19 @@
+<nav>
+    <ul>
+        <li>
+            <a href="/users/create">Cadastrar</a>
+        </li>
+    </ul>
+</nav>
+<h1>Usuários cadastrados</h1>
+<div class="container">
+    {{#each users}}
+    <div class="item">
+        <span>{{this.name}}</span>: <b>{{this.occupation}}</b> - <a href="/users/{{this.id}}">Ver detalhes</a> - <a href="/users/edit/{{this.id}}">Editar</a>
+        <hr>
+    </div>
+    <form action="/users/delete/{{this.id}}" method="post">
+        <input type="submit" value="Excluir">
+    </form>
+    {{/each}}
+</div>
